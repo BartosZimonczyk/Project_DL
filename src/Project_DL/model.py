@@ -10,6 +10,11 @@ import pytorch_lightning as pl
 from pytorch_lightning.loggers import WandbLogger
 from pytorch_lightning import Trainer
 
+from kedro.io import DataCatalog, MemoryDataSet
+from kedro.pipeline import node, Pipeline
+from kedro.runner import SequentialRunner
+
+
 class LitAutoEncoder(pl.LightningModule):
 	def __init__(self):
 		super().__init__()
@@ -47,19 +52,52 @@ class LitAutoEncoder(pl.LightningModule):
 		loss = F.mse_loss(x_hat, x)
 		self.log('val_loss', loss)
 
-# data
-dataset = MNIST('', train=True, download=True, transform=transforms.ToTensor())
-mnist_train, mnist_val = random_split(dataset, [55000, 5000])
 
-train_loader = DataLoader(mnist_train, batch_size=32)
-val_loader = DataLoader(mnist_val, batch_size=32)
+data_catalog = DataCatalog({"dataset": MemoryDataSet()})
+
+# data
+def load_dataset():
+		dataset = MNIST('', train=True, download=True, transform=transforms.ToTensor())
+		mnist_train, mnist_val = random_split(dataset, [55000, 5000])
+
+		train_loader = DataLoader(mnist_train, batch_size=32)
+		val_loader = DataLoader(mnist_val, batch_size=32)
+		return train_loader, val_loader
+
+load_dataset_node = node(load_dataset, inputs=None, outputs=["train_loader", "val_loader"])
 
 # model
-model = LitAutoEncoder()
+def get_model():
+		model = LitAutoEncoder()
+		return model
+ 
+get_model_node = node(get_model, inputs=None, outputs="model")
 
 #logger
-wandb_logger = WandbLogger(project="test-project")
+def get_logger():
+		wandb_logger = WandbLogger(project="test-project")
+		return wandb_logger
 
-# training
-trainer = pl.Trainer(logger=wandb_logger)
-trainer.fit(model, train_loader, val_loader)
+get_logger_node = node(get_logger, inputs=None, outputs="logger")
+
+
+# trainer
+def get_trainer(wandb_logger):
+		trainer = pl.Trainer(logger=wandb_logger)
+		return trainer
+
+get_trainer_node = node(get_trainer, inputs="logger", outputs="trainer")
+
+# train
+def train(trainer, model, train_loader, val_loader):
+		trainer.fit(model, train_loader, val_loader)
+ 
+ 
+train_node = node(train, inputs=["trainer", "model", "train_loader", "val_loader"], outputs="")
+
+pipeline = Pipeline([load_dataset_node, get_model_node, get_logger_node, get_trainer_node, train_node])
+
+runner = SequentialRunner()
+
+print(runner.run(pipeline, data_catalog))
+
