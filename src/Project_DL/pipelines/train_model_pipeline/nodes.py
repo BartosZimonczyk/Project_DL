@@ -1,3 +1,7 @@
+"""
+This is a boilerplate pipeline 'train_model_pipeline'
+generated using Kedro 0.17.7
+"""
 
 import torch
 from torch import nn
@@ -94,10 +98,4 @@ def train(trainer, model, train_loader, val_loader):
  
  
 train_node = node(train, inputs=["trainer", "model", "train_loader", "val_loader"], outputs="")
-
-pipeline = Pipeline([load_dataset_node, get_model_node, get_logger_node, get_trainer_node, train_node])
-
-runner = SequentialRunner()
-
-print(runner.run(pipeline, data_catalog))
 
