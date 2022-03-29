@@ -54,6 +54,7 @@ idna==2.10
     #   yarl
 importlib-metadata==4.11.2
     # via markdown
+kedro==0.17.7
 markdown==3.3.6
     # via tensorboard
 multidict==6.0.2

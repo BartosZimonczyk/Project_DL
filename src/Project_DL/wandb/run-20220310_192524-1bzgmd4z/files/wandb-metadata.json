@@ -1,0 +1,22 @@
+{
+    "os": "Linux-5.4.95-42.163.amzn2.x86_64-x86_64-with-glibc2.2.5",
+    "python": "3.8.12",
+    "heartbeatAt": "2022-03-10T19:25:38.815949",
+    "startedAt": "2022-03-10T19:25:24.098143",
+    "docker": null,
+    "cpu_count": 2,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "model.py",
+    "codePath": "src/Project_DL/model.py",
+    "git": {
+        "remote": "https://github.com/BartosZimonczyk/Project_DL.git",
+        "commit": "03ed44cf21cfdebe05e5bac3d0ed1579cb0014a9"
+    },
+    "email": null,
+    "root": "/work/Project_DL",
+    "host": "p-7e35e7f0-ee75-4220-b686-c6201e6af4a8",
+    "username": "root",
+    "executable": "/root/venv/bin/python"
+}

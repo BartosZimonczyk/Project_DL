@@ -1,20 +1,12 @@
-# Project_DL
+# ErCaNet (name in progres...)
 
-## Overview
+This project is under construction...
 
-This is your new Kedro project, which was generated using `Kedro 0.17.7`.
+## What is ErCaNet about?
 
-Take a look at the [Kedro documentation](https://kedro.readthedocs.io) to get started.
 
-## Rules and guidelines
 
-In order to get the best out of the template:
-
-* Don't remove any lines from the `.gitignore` file we provide
-* Make sure your results can be reproduced by following a [data engineering convention](https://kedro.readthedocs.io/en/stable/12_faq/01_faq.html#what-is-data-engineering-convention)
-* Don't commit data to your repository
-* Don't commit any credentials or your local configuration to your repository. Keep all your credentials and local configuration in `conf/local/`
-
+# How to manage with the package
 ## How to install dependencies
 
 Declare any dependencies in `src/requirements.txt` for `pip` installation and `src/environment.yml` for `conda` installation.
@@ -57,70 +49,24 @@ After this, if you'd like to update your project requirements, please update `sr
 
 [Further information about project dependencies](https://kedro.readthedocs.io/en/stable/04_kedro_project_setup/01_dependencies.html#project-specific-dependencies)
 
-## How to work with Kedro and notebooks
-
-> Note: Using `kedro jupyter` or `kedro ipython` to run your notebook provides these variables in scope: `context`, `catalog`, and `startup_error`.
->
-> Jupyter, JupyterLab, and IPython are already included in the project requirements by default, so once you have run `kedro install` you will not need to take any extra steps before you use them.
-
-### Jupyter
-To use Jupyter notebooks in your Kedro project, you need to install Jupyter:
-
-```
-pip install jupyter
-```
-
-After installing Jupyter, you can start a local notebook server:
-
-```
-kedro jupyter notebook
-```
-
-### JupyterLab
-To use JupyterLab, you need to install it:
-
-```
-pip install jupyterlab
-```
-
-You can also start JupyterLab:
-
-```
-kedro jupyter lab
-```
-
-### IPython
-And if you want to run an IPython session:
-
-```
-kedro ipython
-```
-
-### How to convert notebook cells to nodes in a Kedro project
-You can move notebook code over into a Kedro project structure using a mixture of [cell tagging](https://jupyter-notebook.readthedocs.io/en/stable/changelog.html#release-5-0-0) and Kedro CLI commands.
-
-By adding the `node` tag to a cell and running the command below, the cell's source code will be copied over to a Python file within `src/<package_name>/nodes/`:
-
-```
-kedro jupyter convert <filepath_to_my_notebook>
-```
-> *Note:* The name of the Python file matches the name of the original notebook.
-
-Alternatively, you may want to transform all your notebooks in one go. Run the following command to convert all notebook files found in the project root directory and under any of its sub-folders:
-
-```
-kedro jupyter convert --all
-```
-
-### How to ignore notebook output cells in `git`
-To automatically strip out all output cell contents before committing to `git`, you can run `kedro activate-nbstripout`. This will add a hook in `.git/config` which will run `nbstripout` before anything is committed to `git`.
-
-> *Note:* Your output cells will be retained locally.
-
 ## Package your Kedro project
 
 [Further information about building project documentation and packaging your project](https://kedro.readthedocs.io/en/stable/03_tutorial/08_package_a_project.html)
 
 
-## This is out project
+## This is our project
 
+# Process of creating the ErCaNet (Raport section)
+Below is the time schedule of work putted into the project. *Estimated*.
+## Week 1
+Firstly and the most important was that, we had to team up. Nextly we initiated the repo on github and made kedro project structure. We putted into `src/Project_DL/pipelines/train_model_pipeline/nodes.py` the example from `Pytorch-Lighting` website, to just test the Kedro pipline-hooks structure. We tested it on Deep Note Team Project. We logged the overview of training process with `WandB`. Nothing interesting, it was just dummy model.
+## Week 2
+We established the theme of our project: we want to remove the caption from the images. So we come up with the firt task that had to be done in the first place.
+
+1.  Research of the problem in the articles.
+2.  Prepare the dataset, firstly, most importantly, the training set.
+3.  Prepare proper `README`, with nice raport section and, if possible, help others.
+
+We splitted the workload among ourselves. 
+## Week 3
+**TBD:** Discuss the work done and establish new plan. 

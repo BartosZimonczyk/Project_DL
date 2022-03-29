@@ -20,9 +20,8 @@ logs/**
 # also keep all .gitkeep files
 !.gitkeep
 
-# also keep the example dataset
-!data/01_raw/iris.csv
-
+# ignore big cores
+*core.*
 
 ##########################
 # Common files
