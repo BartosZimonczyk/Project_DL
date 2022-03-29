@@ -16,7 +16,11 @@ from pytorch_lightning import Trainer
 
 data_catalog = DataCatalog({"dataset": MemoryDataSet()})
 
-train_path = "../../../../data/3gb_dataset"
+train_clean_path = "../../../../data/train_clean"
+test_clean_path = "../../../../data/test_clean"
+test_with_caption_path = "../../../../data/test_with_caption"
+val_clean_path = "../../../../data/val_clean"
+val_with_caption_path = "../../../../data/val_with_caption"
 
 # data
 def load_dataset():
@@ -26,12 +30,12 @@ def load_dataset():
 		# train_loader = DataLoader(mnist_train, batch_size=32)
 		# val_loader = DataLoader(mnist_val, batch_size=32)
 		# return train_loader, val_loader
-  dataset = None
-  train_loader = None
-  test_loader = None
-  pass
+  train_loader = None # loads clean images from disk, adds captions on-the-fly
+  test_loader = None  # loads both clean & captioned images from disk
+  val_loader = None   # loads both clean & captioned images from disk
+  return train_loader, test_loader, val_loader
 
-load_dataset_node = node(load_dataset, inputs=None, outputs=["train_loader", "val_loader"])
+load_dataset_node = node(load_dataset, inputs=None, outputs=["train_loader", "test_loader", "val_loader"])
 
 # model
 def get_model():
@@ -56,9 +60,9 @@ def get_trainer(wandb_logger):
 get_trainer_node = node(get_trainer, inputs="logger", outputs="trainer")
 
 # train
-def train(trainer, model, train_loader, val_loader):
-		trainer.fit(model, train_loader, val_loader)
+def train(trainer, model, train_loader, test_loader):
+		trainer.fit(model, train_loader, test_loader)
  
  
-train_node = node(train, inputs=["trainer", "model", "train_loader", "val_loader"], outputs="")
+train_node = node(train, inputs=["trainer", "model", "train_loader", "test_loader"], outputs="")
 
