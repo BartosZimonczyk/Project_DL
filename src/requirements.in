@@ -4,3 +4,4 @@ torchvision
 pytorch-lightning
 wandb
 Pillow
+matplotlib
