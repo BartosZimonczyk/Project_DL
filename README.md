@@ -70,4 +70,19 @@ We established the theme of our project: we want to remove the caption from the 
 
 We splitted the workload among ourselves. 
 ## Week 3
-**TBD:** Discuss the work done and establish new plan. 
+We have researched the problem and find that ... `to be filled by Bartosz Bieda`.
+
+We have prepared the datasets. The function that adds random Lorem Ipsum part of the text, with random font, size, color and place. We have splitted the data into 5 folders:
+
+1. Clean images for train set
+2. Clean images for test set
+3. Test set images with caption
+4. Clean images for validation set
+5. Validation set images with caption
+
+There is no dataset with caption for training, because it would take more than 5GB, to sum up. So it wouldn't fit on `Deep Note` drive. We have decided to calculate images with caption in training *on the fly*.
+
+## Week 4 and following
+We have decided to change our approach in terms of preparing our datasets. In order to utilize power of `Pytorch Lightning`, we had to create dataloaders. We swtich to preparing captions *on the fly* for all datasets. 
+
+Currently we are working on teaching our first model.
