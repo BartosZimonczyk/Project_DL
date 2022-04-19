@@ -1,4 +1,6 @@
 numpy
 torch
+torchvision
 pytorch-lightning
 wandb
+Pillow

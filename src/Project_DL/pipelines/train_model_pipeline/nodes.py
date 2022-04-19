@@ -12,56 +12,52 @@ from Project_DL.pipelines.train_model_pipeline.model import ErCaNet
 from pytorch_lightning.loggers import WandbLogger
 from pytorch_lightning import Trainer
 
+from dataloaders import DataModuleClass
 
 
 data_catalog = DataCatalog({"dataset": MemoryDataSet()})
-
-train_clean_path = "../../../../data/train_clean"
-test_clean_path = "../../../../data/test_clean"
-test_with_caption_path = "../../../../data/test_with_caption"
-val_clean_path = "../../../../data/val_clean"
-val_with_caption_path = "../../../../data/val_with_caption"
+data_path = 'data/all_clean'
+font_path = 'data/fonts'
+true_randomness = False
+batch_size = 1
+shuffle_in_loader = True
 
 # data
 def load_dataset():
-		# dataset = MNIST('', train=True, download=True, transform=transforms.ToTensor())
-		# mnist_train, mnist_val = random_split(dataset, [55000, 5000])
-
-		# train_loader = DataLoader(mnist_train, batch_size=32)
-		# val_loader = DataLoader(mnist_val, batch_size=32)
-		# return train_loader, val_loader
-  train_loader = None # loads clean images from disk, adds captions on-the-fly
-  test_loader = None  # loads both clean & captioned images from disk
-  val_loader = None   # loads both clean & captioned images from disk
-  return train_loader, test_loader, val_loader
+	dataset = DataModuleClass(data_path, font_path, true_randomness)
+	dataset.setup()
+	train_loader = dataset.train_dataloader(batch_size, shuffle_in_loader) # loads clean images from disk, adds captions on-the-fly
+	test_loader = dataset.test_dataloader(batch_size, shuffle_in_loader)  # loads clean images from disk, adds captions on-the-fly
+	val_loader = dataset.val_dataloader(batch_size, shuffle_in_loader)   # loads clean images from disk, adds captions on-the-fly
+	return train_loader, test_loader, val_loader
 
 load_dataset_node = node(load_dataset, inputs=None, outputs=["train_loader", "test_loader", "val_loader"])
 
 # model
 def get_model():
-		model = ErCaNet()
-		return model
+	model = ErCaNet()
+	return model
  
 get_model_node = node(get_model, inputs=None, outputs="model")
 
 #logger
 def get_logger():
-		wandb_logger = WandbLogger(project="test-project")
-		return wandb_logger
+	wandb_logger = WandbLogger(project="test-project")
+	return wandb_logger
 
 get_logger_node = node(get_logger, inputs=None, outputs="logger")
 
 
 # trainer
 def get_trainer(wandb_logger):
-		trainer = Trainer(logger=wandb_logger)
-		return trainer
+	trainer = Trainer(logger=wandb_logger)
+	return trainer
 
 get_trainer_node = node(get_trainer, inputs="logger", outputs="trainer")
 
 # train
 def train(trainer, model, train_loader, test_loader):
-		trainer.fit(model, train_loader, test_loader)
+	trainer.fit(model, train_loader, test_loader)
  
  
 train_node = node(train, inputs=["trainer", "model", "train_loader", "test_loader"], outputs="")

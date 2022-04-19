@@ -17,6 +17,9 @@ logs/**
 !data/**/
 !logs/**/
 
+# and except fonts
+!data/fonts/*
+
 # also keep all .gitkeep files
 !.gitkeep
 
