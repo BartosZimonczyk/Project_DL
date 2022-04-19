@@ -7,6 +7,8 @@ from torch.utils.data import Dataset
 from torchvision.transforms import ToTensor
 from PIL import Image, ImageFont, ImageDraw
 
+from matplotlib.pyplot import imshow, show
+
 
 class ImagesDataset(Dataset):
     def __init__(self, data_path='data/all_clean', font_path='data/fonts', true_randomness=False):
@@ -67,10 +69,13 @@ class ImagesDataset(Dataset):
         # we can omit seed input in below method, to have truly random output
         image_with_caption = self.add_random_text(image, index)
 
-        return (ToTensor(image), ToTensor(image_with_caption))
+        return (ToTensor()(image), ToTensor()(image_with_caption))
 
 if __name__ == "__main__":
     ds = ImagesDataset()
     print(len(ds))
     print(ds.get_random_font())
-    print(ds[10952])
+    imshow(ds[0][0].permute(1, 2, 0))
+    show()
+    imshow(ds[0][1].permute(1, 2, 0))
+    show()
