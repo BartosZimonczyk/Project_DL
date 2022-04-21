@@ -3,8 +3,6 @@ This is a boilerplate pipeline 'train_model_pipeline'
 generated using Kedro 0.17.7
 """
 
-from torch.utils.data import random_split
-
 from kedro.io import DataCatalog, MemoryDataSet
 from kedro.pipeline import node, Pipeline
 from kedro.runner import SequentialRunner
