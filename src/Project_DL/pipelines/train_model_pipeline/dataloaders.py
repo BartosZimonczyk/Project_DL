@@ -31,7 +31,7 @@ class DataModuleClass(pl.LightningDataModule):
         self.prepare_data()
         n = len(self.dataset)
         p_train, p_test, p_val = proportions
-        lenghts = [np.floor(n*p_train), np.floor(n*p_test), np.floor(n*p_val)]
+        lenghts = [np.floor(n*p_train).astype(np.int_), np.floor(n*p_test).astype(np.int_), np.floor(n*p_val).astype(np.int_)]
         self.train_set, self.test_set, self.val_set = random_split(self.dataset, lenghts)
     
     def train_dataloader(self, batch_size=1, shuffle=True):
