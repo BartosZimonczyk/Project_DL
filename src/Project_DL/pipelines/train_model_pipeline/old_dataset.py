@@ -12,6 +12,12 @@ from matplotlib.pyplot import imshow, show
 
 class ImagesDataset(Dataset):
     def __init__(self, data_path='data/all_clean', font_path='data/fonts', true_randomness=False):
+        """
+        A dataset class build on top of PyTorch builtin Dataset class.
+        One should use this class while building dataloaders, if raw data is in data/all_clean 
+        in form of .JPEG images. Files in the mentioned folder should be named 
+        "image_{integers, starting from 0}.JEPG". 
+        """
         self.data_path = data_path
         self.font_path = font_path
         self.true_randomness = true_randomness
