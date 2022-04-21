@@ -28,6 +28,7 @@ class DataModuleClass(pl.LightningDataModule):
         # Define steps that should be done on 
         # every GPU, like splitting data, applying
         # transform etc.
+        self.prepare_data()
         n = len(self.dataset)
         p_train, p_test, p_val = proportions
         lenghts = [np.floor(n*p_train), np.floor(n*p_test), np.floor(n*p_val)]
