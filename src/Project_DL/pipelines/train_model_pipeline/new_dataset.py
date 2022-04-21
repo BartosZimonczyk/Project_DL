@@ -132,8 +132,9 @@ class BatchesImagesDataset(Dataset):
 
         return (ToTensor()(image), ToTensor()(image_with_caption))
 
+
 if __name__ == "__main__":
-    ds = BatchesImagesDataset(resize_up_to=256)
+    ds = BatchesImagesDataset(resize_up_to=None)
     print('done')
     image_0 = ds[0]
     imshow(image_0[0].permute(1, 2, 0))

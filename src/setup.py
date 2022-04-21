@@ -33,6 +33,7 @@ setup(
             "sphinx-autodoc-typehints==1.11.1",
             "sphinx_copybutton==0.3.1",
             "ipykernel>=5.3, <7.0",
+            "torchvision==0.12.0",
         ]
     },
 )

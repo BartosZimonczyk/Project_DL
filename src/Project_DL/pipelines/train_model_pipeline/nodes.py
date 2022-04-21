@@ -16,7 +16,7 @@ from Project_DL.pipelines.train_model_pipeline.dataloaders import DataModuleClas
 
 
 data_catalog = DataCatalog({"dataset": MemoryDataSet()})
-data_path = 'data/all_clean'
+data_path = 'data/all_clean_batches'
 font_path = 'data/fonts'
 true_randomness = False
 resize_up_to = None
@@ -52,9 +52,8 @@ def train(trainer, model, train_loader, test_loader):
 	trainer.fit(model, train_loader, test_loader)
 
 
-if __name__ == '__main__':
-	load_dataset_node = node(load_dataset, inputs=None, outputs=["train_loader", "test_loader", "val_loader"])
-	get_model_node = node(get_model, inputs=None, outputs="model")
-	get_logger_node = node(get_logger, inputs=None, outputs="logger")
-	get_trainer_node = node(get_trainer, inputs="logger", outputs="trainer")
-	train_node = node(train, inputs=["trainer", "model", "train_loader", "test_loader"], outputs="")
+load_dataset_node = node(load_dataset, inputs=None, outputs=["train_loader", "test_loader", "val_loader"])
+get_model_node = node(get_model, inputs=None, outputs="model")
+get_logger_node = node(get_logger, inputs=None, outputs="logger")
+get_trainer_node = node(get_trainer, inputs="logger", outputs="trainer")
+train_node = node(train, inputs=["trainer", "model", "train_loader", "test_loader"], outputs="")
