@@ -34,7 +34,7 @@ class DataModuleClass(pl.LightningDataModule):
         lenghts = [np.floor(n*p_train).astype(np.int_), np.floor(n*p_test).astype(np.int_), np.floor(n*p_val).astype(np.int_)]
         self.train_set, self.test_set, self.val_set = random_split(self.dataset, lenghts)
     
-    def train_dataloader(self, batch_size=1, shuffle=True):
+    def train_dataloader(self, batch_size=1, shuffle=False):
         # Return DataLoader for Training Data here
         return DataLoader(
             dataset=self.train_set,
@@ -42,7 +42,7 @@ class DataModuleClass(pl.LightningDataModule):
             shuffle=shuffle
         )
     
-    def val_dataloader(self, batch_size=1, shuffle=True):
+    def val_dataloader(self, batch_size=1, shuffle=False):
         # Return DataLoader for Validation Data here
         return DataLoader(
             dataset=self.val_set,
@@ -50,7 +50,7 @@ class DataModuleClass(pl.LightningDataModule):
             shuffle=shuffle
         )
     
-    def test_dataloader(self, batch_size=1, shuffle=True):
+    def test_dataloader(self, batch_size=1, shuffle=False):
         # Return DataLoader for Testing Data here
         return DataLoader(
             dataset=self.test_set,
