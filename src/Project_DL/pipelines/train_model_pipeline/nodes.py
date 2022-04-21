@@ -39,7 +39,7 @@ def get_model():
 
 #logger
 def get_logger():
-	wandb_logger = WandbLogger(project="test-project")
+	wandb_logger = WandbLogger(project="ErCaNet")
 	return wandb_logger
 
 # trainer

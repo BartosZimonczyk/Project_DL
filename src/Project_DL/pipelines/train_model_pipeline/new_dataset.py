@@ -130,7 +130,7 @@ class BatchesImagesDataset(Dataset):
 
         image_with_caption = self.add_random_text(image, index)
 
-        return (ToTensor()(image), ToTensor()(image_with_caption))
+        return (ToTensor()(image)/255, ToTensor()(image_with_caption)/255)
 
 
 if __name__ == "__main__":
