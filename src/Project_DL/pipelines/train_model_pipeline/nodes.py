@@ -19,12 +19,13 @@ data_catalog = DataCatalog({"dataset": MemoryDataSet()})
 data_path = 'data/all_clean'
 font_path = 'data/fonts'
 true_randomness = False
+resize_up_to = None
 batch_size = 1
 shuffle_in_loader = True
 
 # data
 def load_dataset():
-	dataset = DataModuleClass(data_path, font_path, true_randomness)
+	dataset = DataModuleClass(data_path, font_path, resize_up_to, true_randomness)
 	dataset.setup()
 	train_loader = dataset.train_dataloader(batch_size, shuffle_in_loader) # loads clean images from disk, adds captions on-the-fly
 	test_loader = dataset.test_dataloader(batch_size, shuffle_in_loader)  # loads clean images from disk, adds captions on-the-fly

@@ -5,11 +5,12 @@ from torch.utils.data import random_split, DataLoader
 from Project_DL.pipelines.train_model_pipeline.new_dataset import BatchesImagesDataset
 
 class DataModuleClass(pl.LightningDataModule):
-    def __init__(self, data_path='data/all_clean', font_path='data/fonts', true_randomness=False, transform=None):
+    def __init__(self, data_path='data/all_clean', font_path='data/fonts', resize_up_to=None, true_randomness=False, transform=None):
         #Define required parameters here
         super().__init__(self)
         self.data_path = data_path
         self.font_path = font_path
+        self.resize_up_to = resize_up_to
         self.true_randomness = true_randomness
         self.transform = transform
     
@@ -19,6 +20,7 @@ class DataModuleClass(pl.LightningDataModule):
         self.dataset = BatchesImagesDataset(
             self.data_path,
             self.font_path,
+            self.resize_up_to,
             self.true_randomness,
         )
     
