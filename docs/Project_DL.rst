@@ -1,11 +1,6 @@
 Project\_DL package
 ===================
 
-.. automodule:: Project_DL
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
 Subpackages
 -----------
 
@@ -37,6 +32,14 @@ Project\_DL.settings module
 ---------------------------
 
 .. automodule:: Project_DL.settings
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: Project_DL
    :members:
    :undoc-members:
    :show-inheritance:

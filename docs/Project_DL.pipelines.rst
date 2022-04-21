@@ -1,11 +1,6 @@
 Project\_DL.pipelines package
 =============================
 
-.. automodule:: Project_DL.pipelines
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
 Subpackages
 -----------
 
@@ -13,3 +8,11 @@ Subpackages
    :maxdepth: 4
 
    Project_DL.pipelines.train_model_pipeline
+
+Module contents
+---------------
+
+.. automodule:: Project_DL.pipelines
+   :members:
+   :undoc-members:
+   :show-inheritance:
