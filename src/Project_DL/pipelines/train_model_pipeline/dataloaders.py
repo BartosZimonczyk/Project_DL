@@ -2,7 +2,7 @@ import pytorch_lightning as pl
 import numpy as np
 
 from torch.utils.data import random_split, DataLoader
-from dataset import ImagesDataset
+from Project_DL.pipelines.train_model_pipeline.new_dataset import BatchesImagesDataset
 
 class DataModuleClass(pl.LightningDataModule):
     def __init__(self, data_path='data/all_clean', font_path='data/fonts', true_randomness=False, transform=None):
@@ -16,7 +16,7 @@ class DataModuleClass(pl.LightningDataModule):
     def prepare_data(self):
         # Define steps that should be done
         # on only one GPU, like getting data.
-        self.dataset = ImagesDataset(
+        self.dataset = BatchesImagesDataset(
             self.data_path,
             self.font_path,
             self.true_randomness,

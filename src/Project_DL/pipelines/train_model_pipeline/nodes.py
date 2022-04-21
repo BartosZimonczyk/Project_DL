@@ -12,7 +12,7 @@ from Project_DL.pipelines.train_model_pipeline.model import ErCaNet
 from pytorch_lightning.loggers import WandbLogger
 from pytorch_lightning import Trainer
 
-from dataloaders import DataModuleClass
+from Project_DL.pipelines.train_model_pipeline.dataloaders import DataModuleClass
 
 
 data_catalog = DataCatalog({"dataset": MemoryDataSet()})
