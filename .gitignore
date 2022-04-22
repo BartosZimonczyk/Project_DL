@@ -159,5 +159,4 @@ venv.bak/
 
 # mypy
 .mypy_cache/
-.wandb/**/*
-.src/Project_DL/pipelines/wandb/**/*
+**/wandb/**/*
