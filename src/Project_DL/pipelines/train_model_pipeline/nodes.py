@@ -60,8 +60,3 @@ def train(trainer, model, train_loader, test_loader):
   print("TRAINED")
   print("##########################################")
 
-
-load_dataset_node = node(load_dataset, inputs=None, outputs=["train_loader", "test_loader", "val_loader"])
-get_model_node = node(get_model, inputs=None, outputs="model")
-get_trainer_node = node(get_trainer, inputs=None, outputs="trainer")
-train_node = node(train, inputs=["trainer", "model", "train_loader", "test_loader"], outputs=None)
