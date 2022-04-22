@@ -28,7 +28,6 @@ class BatchesImagesDataset(Dataset):
             """
         self.IMG_SIZE = 64
         self.batch_sizes = self._get_batch_sizes()
-        self.current_item = 0
         self.current_batch_name = 'train_data_batch_1'
         self.current_batch_data = self.unpickle(os.path.join(self.data_path, self.current_batch_name))['data']
         self._tune_current_data()

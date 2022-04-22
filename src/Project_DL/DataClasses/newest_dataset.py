@@ -15,7 +15,7 @@ class UnpickledImagesDataset(Dataset):
     def __init__(self, data_path='data/all_unpickle', font_path='data/fonts', resize_up_to=None, true_randomness=False):
         """
         A dataset class build on top of PyTorch builtin Dataset class.
-        One should use this class while building dataloaders, if raw data is in data/all_clean 
+        One should use this class while building dataloaders, if raw data is in data_path
         in form of .JPEG images. Files in the mentioned folder should be named 
         "image_{integers, starting from 0}.JEPG". 
         """
