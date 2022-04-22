@@ -9,7 +9,7 @@ from kedro.runner import SequentialRunner
 from Project_DL.pipelines.train_model_pipeline.model import ErCaNet
 from pytorch_lightning import Trainer
 
-from Project_DL.pipelines.train_model_pipeline.dataloaders import DataModuleClass
+from Project_DL.DataClasses.dataloaders import DataModuleClass
 
 import wandb
 wandb.init(project="ErCaNet", entity="coldteam")

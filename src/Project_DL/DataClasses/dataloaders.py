@@ -2,7 +2,7 @@ import pytorch_lightning as pl
 import numpy as np
 
 from torch.utils.data import random_split, DataLoader
-from Project_DL.pipelines.train_model_pipeline.new_dataset import BatchesImagesDataset
+from Project_DL.DataClasses.new_dataset import BatchesImagesDataset
 
 class DataModuleClass(pl.LightningDataModule):
     def __init__(self, data_path='data/all_clean', font_path='data/fonts', resize_up_to=None, true_randomness=False, transform=None):
