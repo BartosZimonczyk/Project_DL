@@ -1,0 +1,23 @@
+{
+    "os": "Linux-5.4.0-109-generic-x86_64-with-glibc2.29",
+    "python": "3.8.10",
+    "heartbeatAt": "2022-04-21T21:18:59.403101",
+    "startedAt": "2022-04-21T21:18:56.580705",
+    "docker": null,
+    "cpu_count": 8,
+    "cuda": null,
+    "args": [
+        "run"
+    ],
+    "state": "running",
+    "program": "/home/bartek/.local/bin/kedro",
+    "git": {
+        "remote": "https://github.com/BartosZimonczyk/Project_DL",
+        "commit": "86855cefb96ba3997970e3550e7f3bb4ab4f97f1"
+    },
+    "email": "nerkulec@github.com",
+    "root": "/home/bartek/Studia/DLProject",
+    "host": "bartek-laptop",
+    "username": "bartek",
+    "executable": "/usr/bin/python3"
+}
