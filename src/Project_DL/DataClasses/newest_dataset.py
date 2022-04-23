@@ -12,13 +12,14 @@ from matplotlib.pyplot import imshow, show
 
 
 class UnpickledImagesDataset(Dataset):
-    def __init__(self, data_path='data/all_unpickle', font_path='data/fonts', resize_up_to=None, true_randomness=False):
+    def __init__(self, max_batches=5, data_path='data/all_unpickle', font_path='data/fonts', resize_up_to=None, true_randomness=False):
         """
         A dataset class build on top of PyTorch builtin Dataset class.
         One should use this class while building dataloaders, if raw data is in data_path
         in form of .JPEG images. Files in the mentioned folder should be named 
         "image_{integers, starting from 0}.JEPG". 
         """
+        self.max_batches = max_batches
         self.data_path = data_path
         self.font_path = font_path
         self.resize_up_to = resize_up_to
@@ -31,7 +32,7 @@ class UnpickledImagesDataset(Dataset):
             Suspendisse sagittis egestas rutrum. Fusce vestibulum dolor non sem maximus sollicitudin. Aenean ac metus neque. Donec sed massa finibus, venenatis tortor non, tempor ex. Vestibulum imperdiet suscipit nibh, eget feugiat tortor interdum eu. Fusce non posuere ex. Praesent vel felis quis lacus varius ultricies. Donec id quam ut orci convallis sollicitudin. Curabitur magna leo, pharetra quis sapien in, eleifend lobortis eros. Suspendisse ut purus sem. Nam a vehicula sapien. Maecenas id pulvinar velit. Aenean lobortis felis id risus porttitor, in sagittis enim facilisis.
             Vestibulum efficitur cursus metus, vel faucibus sem venenatis ut. Aenean luctus felis turpis, sed molestie leo varius eu. Cras posuere sollicitudin gravida. Duis ut blandit justo. Donec leo diam, euismod a aliquet sit amet, dictum eget turpis. Suspendisse lacus diam, porta sagittis aliquam ut, laoreet ullamcorper nisl. Pellentesque semper pellentesque ipsum sed consectetur. In posuere nisi at est accumsan, sit amet viverra felis egestas. Donec placerat luctus faucibus.
             """
-        self.batch_names = sorted(os.listdir(self.data_path))
+        self.batch_names = sorted(os.listdir(self.data_path))[:self.max_batches]
         self.batch_sizes = self._get_batch_sizes()
         self.cumulitve_batch_sizes = np.cumsum([v for v in self.batch_sizes.values()])
 

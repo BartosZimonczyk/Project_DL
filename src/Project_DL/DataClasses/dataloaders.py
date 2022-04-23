@@ -5,9 +5,10 @@ from torch.utils.data import random_split, DataLoader
 from Project_DL.DataClasses.newest_dataset import UnpickledImagesDataset
 
 class DataModuleClass(pl.LightningDataModule):
-    def __init__(self, data_path='data/all_clean', font_path='data/fonts', resize_up_to=None, true_randomness=False, transform=None):
+    def __init__(self, max_batches=5, data_path='data/all_clean', font_path='data/fonts', resize_up_to=None, true_randomness=False, transform=None):
         #Define required parameters here
         super().__init__(self)
+        self.max_batches = max_batches
         self.data_path = data_path
         self.font_path = font_path
         self.resize_up_to = resize_up_to
@@ -18,6 +19,7 @@ class DataModuleClass(pl.LightningDataModule):
         # Define steps that should be done
         # on only one GPU, like getting data.
         self.dataset = UnpickledImagesDataset(
+            self.max_batches,
             self.data_path,
             self.font_path,
             self.resize_up_to,

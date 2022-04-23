@@ -21,6 +21,7 @@ wandb.init(project="ErCaNet", entity="coldteam")
 data = {}
 memory_dataset = MemoryDataSet(data)
 data_catalog = DataCatalog({"dataset": memory_dataset})
+max_batches = 5
 data_path = 'data/all_unpickle'
 font_path = 'data/fonts'
 model_save_path = 'models/'
@@ -31,7 +32,7 @@ shuffle_in_loader = True
 
 # data
 def load_dataset():
-  dataset = DataModuleClass(data_path, font_path, resize_up_to, true_randomness)
+  dataset = DataModuleClass(max_batches, data_path, font_path, resize_up_to, true_randomness)
   dataset.setup()
   train_loader = dataset.train_dataloader(batch_size, shuffle_in_loader) # loads clean images from disk, adds captions on-the-fly
   test_loader = dataset.test_dataloader(batch_size, shuffle_in_loader)  # loads clean images from disk, adds captions on-the-fly
