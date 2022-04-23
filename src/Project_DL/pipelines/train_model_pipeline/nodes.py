@@ -66,6 +66,7 @@ def train(trainer, model, train_loader, test_loader):
   print("TRAINED")
   print("##########################################")
 
+# save model to file
 def save_model_to_file(model):
   print("##########################################")
   print(f"SAVING MODEL TO FILE: {wandb.run.name}")
