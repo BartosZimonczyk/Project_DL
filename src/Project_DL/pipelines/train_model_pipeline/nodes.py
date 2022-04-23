@@ -3,6 +3,10 @@ This is a boilerplate pipeline 'train_model_pipeline'
 generated using Kedro 0.17.7
 """
 
+import wandb
+import torch
+import os
+
 from kedro.io import DataCatalog, MemoryDataSet
 from kedro.pipeline import node, Pipeline
 from kedro.runner import SequentialRunner
@@ -11,17 +15,18 @@ from pytorch_lightning import Trainer
 
 from Project_DL.DataClasses.dataloaders import DataModuleClass
 
-import wandb
+
 wandb.init(project="ErCaNet", entity="coldteam")
 
 data = {}
 memory_dataset = MemoryDataSet(data)
 data_catalog = DataCatalog({"dataset": memory_dataset})
-data_path = 'data/all_clean_batches'
+data_path = 'data/all_unpickle'
 font_path = 'data/fonts'
+model_save_path = 'models/'
 true_randomness = False
-resize_up_to = None
-batch_size = 1
+resize_up_to = 256
+batch_size = 64
 shuffle_in_loader = True
 
 # data
@@ -60,3 +65,11 @@ def train(trainer, model, train_loader, test_loader):
   print("TRAINED")
   print("##########################################")
 
+def save_model_to_file(model):
+  print("##########################################")
+  print(f"SAVING MODEL TO FILE: {wandb.run.name}")
+  print("##########################################")
+  torch.save(model.state_dict(), os.path.join(model_save_path, wandb.run.name, '.pt'))
+  print("##########################################")
+  print(f"SAVED")
+  print("##########################################")
