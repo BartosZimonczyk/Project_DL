@@ -54,7 +54,7 @@ class UnpickledImagesDataset(Dataset):
         if os.path.isdir(self.font_path):
             possible_fonts = [f for f in os.listdir(self.font_path) if str(f).split('.')[1] == 'ttf']
             font = random.choice(possible_fonts)
-        return font
+        return os.path.join(self.font_path, font)
 
     def add_random_text(self, image, seed=0):
         if not self.true_randomness:

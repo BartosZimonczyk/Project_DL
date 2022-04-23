@@ -1,1 +1,1 @@
-c.InteractiveShellApp.extensions.append("kedro.extras.extensions.ipython")
+# c.InteractiveShellApp.extensions.append("kedro.extras.extensions.ipython")
