@@ -37,8 +37,8 @@ def load_dataset():
   return train_loader, test_loader, val_loader
 
 # model
-def get_model():
-  model = ErCaNet()
+def get_model(logger):
+  model = ErCaNet(logger.name)
   # wandb.watch(model)
   return model
 
