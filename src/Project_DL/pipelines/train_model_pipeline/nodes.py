@@ -63,11 +63,11 @@ def train(trainer, model, train_loader, test_loader):
   trainer.fit(model, train_loader, test_loader)
 
 # save model to file
-def save_model_to_file(model):
+def save_model_to_file(model, logger):
   print("##########################################")
-  print(f"SAVING MODEL TO FILE: {wandb.run.name}") 
+  print(f"SAVING MODEL TO FILE: {logger.name}") 
   print("##########################################")
-  torch.save(model.state_dict(), os.path.join(model_save_path, f'{wandb.run.name}.pt'))
+  torch.save(model.state_dict(), os.path.join(model_save_path, f'{logger.name}.pt'))
   print("##########################################")
   print(f"SAVED")
   print("##########################################")

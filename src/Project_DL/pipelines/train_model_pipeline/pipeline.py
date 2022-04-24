@@ -14,5 +14,5 @@ def create_pipeline(**kwargs) -> Pipeline:
         node(get_logger, inputs=None, outputs="wandb_logger"),
         node(get_trainer, inputs="wandb_logger", outputs="trainer"),
         node(train, inputs=["trainer", "model", "train_loader", "test_loader"], outputs=None),
-        node(save_model_to_file, inputs=["model"], outputs=None)
+        node(save_model_to_file, inputs=["model", "wandb_logger"], outputs=None)
     ])
