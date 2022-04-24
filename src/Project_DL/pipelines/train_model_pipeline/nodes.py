@@ -41,7 +41,7 @@ def load_dataset():
 
 # model
 def get_model():
-  model = ErCaNet()
+  model = ErCaNet(wandb.run.name)
   wandb.watch(model)
   return model
 
