@@ -3,7 +3,6 @@ This is a boilerplate pipeline 'train_model_pipeline'
 generated using Kedro 0.17.7
 """
 
-import wandb
 import torch
 import os
 
@@ -66,7 +65,7 @@ def train(trainer, model, train_loader, test_loader):
 # save model to file
 def save_model_to_file(model):
   print("##########################################")
-  print(f"SAVING MODEL TO FILE: {wandb.run.name}")
+  print(f"SAVING MODEL TO FILE: {wandb.run.name}") 
   print("##########################################")
   torch.save(model.state_dict(), os.path.join(model_save_path, f'{wandb.run.name}.pt'))
   print("##########################################")
