@@ -26,7 +26,7 @@ class DataModuleClass(pl.LightningDataModule):
             self.true_randomness,
         )
     
-    def setup(self, proportions=(0.7, 0.15, 0.15), stage=None):
+    def setup(self, proportions=(0.9, 0.05, 0.05), stage=None):
         # Define steps that should be done on 
         # every GPU, like splitting data, applying
         # transform etc.
@@ -38,26 +38,32 @@ class DataModuleClass(pl.LightningDataModule):
         lenghts = [train_n, test_n, n-train_n-test_n]
         self.train_set, self.test_set, self.val_set = random_split(self.dataset, lenghts)
     
-    def train_dataloader(self, batch_size=1, shuffle=False):
+    def train_dataloader(self, batch_size=1, shuffle=False, num_workers=1):
         # Return DataLoader for Training Data here
         return DataLoader(
             dataset=self.train_set,
             batch_size=batch_size,
-            shuffle=shuffle
+            shuffle=shuffle,
+            num_workers=num_workers,
+            persistent_workers=True
         )
     
-    def val_dataloader(self, batch_size=1, shuffle=False):
+    def val_dataloader(self, batch_size=1, shuffle=False, num_workers=1):
         # Return DataLoader for Validation Data here
         return DataLoader(
             dataset=self.val_set,
             batch_size=batch_size,
-            shuffle=shuffle
+            shuffle=shuffle,
+            num_workers=num_workers,
+            persistent_workers=True
         )
     
-    def test_dataloader(self, batch_size=1, shuffle=False):
+    def test_dataloader(self, batch_size=1, shuffle=False, num_workers=1):
         # Return DataLoader for Testing Data here
         return DataLoader(
             dataset=self.test_set,
             batch_size=batch_size,
-            shuffle=shuffle
+            shuffle=shuffle,
+            num_workers=num_workers,
+            persistent_workers=True
         )

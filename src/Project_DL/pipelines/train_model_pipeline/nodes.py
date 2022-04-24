@@ -8,15 +8,13 @@ import torch
 import os
 
 from kedro.io import DataCatalog, MemoryDataSet
-from kedro.pipeline import node, Pipeline
-from kedro.runner import SequentialRunner
+from pytorch_lightning.loggers import WandbLogger
 from Project_DL.pipelines.train_model_pipeline.model import ErCaNet
 from pytorch_lightning import Trainer
+from pytorch_lightning.plugins import DDPPlugin
 
 from Project_DL.DataClasses.dataloaders import DataModuleClass
 
-
-wandb.init(project="ErCaNet", entity="coldteam")
 
 data = {}
 memory_dataset = MemoryDataSet(data)
@@ -28,43 +26,42 @@ model_save_path = 'models/'
 true_randomness = False
 resize_up_to = 256
 batch_size = 64
-shuffle_in_loader = True
+loader_workers = 8
 
 # data
 def load_dataset():
   dataset = DataModuleClass(max_batches, data_path, font_path, resize_up_to, true_randomness)
   dataset.setup()
-  train_loader = dataset.train_dataloader(batch_size, shuffle_in_loader) # loads clean images from disk, adds captions on-the-fly
-  test_loader = dataset.test_dataloader(batch_size, shuffle_in_loader)  # loads clean images from disk, adds captions on-the-fly
-  val_loader = dataset.val_dataloader(batch_size, shuffle_in_loader)   # loads clean images from disk, adds captions on-the-fly
+  train_loader = dataset.train_dataloader(batch_size, shuffle = True, num_workers=loader_workers) # loads clean images from disk, adds captions on-the-fly
+  test_loader = dataset.test_dataloader(batch_size, shuffle = False, num_workers=loader_workers)  # loads clean images from disk, adds captions on-the-fly
+  val_loader = dataset.val_dataloader(batch_size, shuffle = False, num_workers=loader_workers)    # loads clean images from disk, adds captions on-the-fly
   return train_loader, test_loader, val_loader
 
 # model
 def get_model():
   model = ErCaNet()
-  wandb.watch(model)
+  # wandb.watch(model)
   return model
 
+def get_logger():
+  wandb_logger = WandbLogger(name='CaptionErase', project='ErCaNet')
+  return wandb_logger
+
 # trainer
-def get_trainer():
-  print("##########################################")
-  print("TRAINER LOADING")
-  print("##########################################")
-  trainer = Trainer(accelerator='auto')
-  print("##########################################")
-  print("TRAINER LOADED")
-  print("##########################################")
+def get_trainer(wandb_logger):
+  trainer = Trainer(
+    accelerator='auto',
+    logger=wandb_logger,
+    log_every_n_steps=10,
+    val_check_interval=0.1,
+    num_processes=1,
+    plugins=DDPPlugin(find_unused_parameters=False),
+  )
   return trainer
 
 # train
 def train(trainer, model, train_loader, test_loader):
-  print("##########################################")
-  print("TRAINING")
-  print("##########################################")
   trainer.fit(model, train_loader, test_loader)
-  print("##########################################")
-  print("TRAINED")
-  print("##########################################")
 
 # save model to file
 def save_model_to_file(model):
