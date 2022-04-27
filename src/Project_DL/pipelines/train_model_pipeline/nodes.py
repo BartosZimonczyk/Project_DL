@@ -49,7 +49,8 @@ def get_logger():
 # trainer
 def get_trainer(wandb_logger):
   trainer = Trainer(
-    accelerator='auto',
+    accelerator='gpu',
+    gpus=1,
     logger=wandb_logger,
     log_every_n_steps=10,
     val_check_interval=0.1,
