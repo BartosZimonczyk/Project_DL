@@ -109,7 +109,7 @@ class UnpickledImagesDataset(Dataset):
         # we can omit seed input in below method, to have truly random output
         image_with_caption = self.add_random_text(image, index)
 
-        return (ToTensor()(image), ToTensor()(image_with_caption))
+        return (ToTensor()(image_with_caption), ToTensor()(image))
 
 if __name__ == "__main__":
     ds = UnpickledImagesDataset(resize_up_to=256)
