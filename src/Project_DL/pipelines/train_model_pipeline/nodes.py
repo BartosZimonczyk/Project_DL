@@ -18,7 +18,7 @@ from Project_DL.DataClasses.dataloaders import DataModuleClass
 data = {}
 memory_dataset = MemoryDataSet(data)
 data_catalog = DataCatalog({"dataset": memory_dataset})
-max_batches = 5
+max_batches = 3
 data_path = 'data/all_unpickle'
 font_path = 'data/fonts'
 model_save_path = 'models/'
@@ -43,7 +43,7 @@ def get_model(logger):
   return model
 
 def get_logger():
-  wandb_logger = WandbLogger(name='CaptionErase', project='ErCaNet')
+  wandb_logger = WandbLogger(name='CaptionEraseBZ-GPU', project='ErCaNet')
   return wandb_logger
 
 # trainer
