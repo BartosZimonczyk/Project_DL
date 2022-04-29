@@ -43,7 +43,7 @@ def get_model(logger):
   return model
 
 def get_logger():
-  wandb_logger = WandbLogger(name='CaptionEraseBZ-GPU-TheSecond', project='ErCaNet')
+  wandb_logger = WandbLogger(name='CaptionEraseBZ-GPU-TheThird', project='ErCaNet')
   return wandb_logger
 
 # trainer
