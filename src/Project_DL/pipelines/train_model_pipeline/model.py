@@ -16,8 +16,6 @@ class ErCaNet(pl.LightningModule):
     		nn.Conv2d(3, 16, (3, 3), 1, 1), nn.ReLU(),
 			nn.Conv2d(16, 32, (3, 3), 1, 1), nn.ReLU(),
 			nn.Conv2d(32, 64, (3, 3), 1, 1), nn.ReLU(),
-			nn.Conv2d(64, 128, (3, 3), 1, 1), nn.ReLU(),
-			nn.Conv2d(128, 64, (3, 3), 1, 1), nn.ReLU(),
 			nn.Conv2d(64, 32, (3, 3), 1, 1), nn.ReLU(),
     		nn.Conv2d(32, 16, (3, 3), 1, 1), nn.ReLU(),
 			nn.Conv2d(16, 3, (3, 3), 1, 1)
@@ -45,16 +43,18 @@ class ErCaNet(pl.LightningModule):
 
 		if not os.path.exists(os.path.join(f'data/training_overview/{self.my_name}')):
 			os.mkdir(os.path.join(f'data/training_overview/{self.my_name}'))
-		if self.counter_of_val_images_saved == 0:
-			fn.to_pil_image(orig_img[0, :, :, :]).save(
-				os.path.join(f'data/training_overview/{self.my_name}/orig_img_val_step_{self.counter_of_val_images_saved}.JPEG'), 
-				'JPEG'
-			)
-			fn.to_pil_image(dirty_img[0, :, :, :]).save(
-				os.path.join(f'data/training_overview/{self.my_name}/dirty_img_val_step_{self.counter_of_val_images_saved}.JPEG'), 
-				'JPEG'
-			)
+
 		if batch_idx % 100 == 0:
+			if self.counter_of_val_images_saved == 0:
+				fn.to_pil_image(orig_img[0, :, :, :]).save(
+					os.path.join(f'data/training_overview/{self.my_name}/orig_img_val_step_{self.counter_of_val_images_saved}.JPEG'), 
+					'JPEG'
+				)
+				fn.to_pil_image(dirty_img[0, :, :, :]).save(
+					os.path.join(f'data/training_overview/{self.my_name}/dirty_img_val_step_{self.counter_of_val_images_saved}.JPEG'), 
+					'JPEG'
+				)
+			
 			fn.to_pil_image(cleaned_img[0, :, :, :]).save(
 				os.path.join(f'data/training_overview/{self.my_name}/cleaned_img_val_step_{self.counter_of_val_images_saved}.JPEG'), 
 				'JPEG'
