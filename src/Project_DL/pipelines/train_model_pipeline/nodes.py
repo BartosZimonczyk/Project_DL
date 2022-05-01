@@ -24,7 +24,7 @@ font_path = 'data/fonts'
 model_save_path = 'models/'
 true_randomness = False
 resize_up_to = 256
-batch_size = 32
+batch_size = 48
 loader_workers = 8
 
 # data
