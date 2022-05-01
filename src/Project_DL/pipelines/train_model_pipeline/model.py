@@ -43,18 +43,21 @@ class ErCaNet(pl.LightningModule):
 
 		if not os.path.exists(os.path.join(f'data/training_overview/{self.my_name}')):
 			os.mkdir(os.path.join(f'data/training_overview/{self.my_name}'))
+			os.mkdir(os.path.join(f'data/training_overview/{self.my_name}/orig_imgs'))
+			os.mkdir(os.path.join(f'data/training_overview/{self.my_name}/dirty_imgs'))
+			os.mkdir(os.path.join(f'data/training_overview/{self.my_name}/cleaned_imgs'))
 
 		if batch_idx % 300 == 0:
 			fn.to_pil_image(orig_img[0, :, :, :]).save(
-				os.path.join(f'data/training_overview/{self.my_name}/orig_img_val_step_{self.counter_of_val_images_saved}.JPEG'), 
+				os.path.join(f'data/training_overview/{self.my_name}/orig_imgs/orig_img_val_step_{self.counter_of_val_images_saved}.JPEG'), 
 				'JPEG'
 			)
 			fn.to_pil_image(dirty_img[0, :, :, :]).save(
-				os.path.join(f'data/training_overview/{self.my_name}/dirty_img_val_step_{self.counter_of_val_images_saved}.JPEG'), 
+				os.path.join(f'data/training_overview/{self.my_name}/dirty_imgs/dirty_img_val_step_{self.counter_of_val_images_saved}.JPEG'), 
 				'JPEG'
 			)
 			fn.to_pil_image(cleaned_img[0, :, :, :]).save(
-				os.path.join(f'data/training_overview/{self.my_name}/cleaned_img_val_step_{self.counter_of_val_images_saved}.JPEG'), 
+				os.path.join(f'data/training_overview/{self.my_name}/cleaned_imgs/cleaned_img_val_step_{self.counter_of_val_images_saved}.JPEG'), 
 				'JPEG'
 			)
 			self.counter_of_val_images_saved += 1
