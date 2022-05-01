@@ -159,6 +159,13 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+# logs
 **/wandb/**/*
 wandb/*
+*.wandb
+lightning_logs/*
+
+# saved models
 models/
+CaptionErase*
