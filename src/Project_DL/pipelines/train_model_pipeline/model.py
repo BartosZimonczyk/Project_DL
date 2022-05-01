@@ -12,17 +12,26 @@ class ErCaNet(pl.LightningModule):
 		super().__init__()
 		self.counter_of_val_images_saved = 0
 		self.my_name = my_name
-		self.cnn = nn.Sequential(
-    		nn.Conv2d(3, 16, (3, 3), 1, 1), nn.ReLU(),
-			nn.Conv2d(16, 32, (3, 3), 1, 1), nn.ReLU(),
-			nn.Conv2d(32, 64, (3, 3), 1, 1), nn.ReLU(),
-			nn.Conv2d(64, 32, (3, 3), 1, 1), nn.ReLU(),
-    		nn.Conv2d(32, 16, (3, 3), 1, 1), nn.ReLU(),
+		self.cnn1 = nn.Sequential(
+    	nn.Conv2d(3, 16, (3, 3), 1, 1), nn.ReLU(),
+			nn.Conv2d(16, 32, (3, 3), 1, 1), nn.ReLU()
+		)
+		self.cnn2 = nn.Sequential(
+    	nn.Conv2d(32, 32, (3, 3), 1, 1), nn.ReLU(),
+			nn.Conv2d(32, 32, (3, 3), 1, 1), nn.ReLU()
+		)
+		self.cnn3 = nn.Sequential(
+    	nn.Conv2d(32, 16, (3, 3), 1, 1), nn.ReLU(),
 			nn.Conv2d(16, 3, (3, 3), 1, 1)
 		)
 
 	def forward(self, img):
-		return img + self.cnn(img)
+		x = img
+		c = self.cnn1(x)
+		x = torch.cat([x, c], dim=1)
+		x = x + self.cnn2(x)
+		x = self.cnn3(x)
+		return x
 
 	def configure_optimizers(self):
 		optimizer = torch.optim.Adam(self.parameters(), lr=1e-3)
