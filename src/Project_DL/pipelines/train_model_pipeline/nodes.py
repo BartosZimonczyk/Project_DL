@@ -18,13 +18,13 @@ from Project_DL.DataClasses.dataloaders import DataModuleClass
 data = {}
 memory_dataset = MemoryDataSet(data)
 data_catalog = DataCatalog({"dataset": memory_dataset})
-max_batches = 5
+max_batches = 3
 data_path = 'data/all_unpickle'
 font_path = 'data/fonts'
 model_save_path = 'models/'
 true_randomness = False
 resize_up_to = 256
-batch_size = 64
+batch_size = 32
 loader_workers = 8
 
 # data
@@ -43,17 +43,19 @@ def get_model(logger):
   return model
 
 def get_logger():
-  wandb_logger = WandbLogger(name='CaptionErase', project='ErCaNet')
+  wandb_logger = WandbLogger(name='CaptionEraseBZ-GPU-TheThird', project='ErCaNet')
   return wandb_logger
 
 # trainer
 def get_trainer(wandb_logger):
   trainer = Trainer(
-    accelerator='auto',
+    accelerator='gpu',
+    gpus=1,
     logger=wandb_logger,
     log_every_n_steps=10,
     val_check_interval=0.1,
     num_processes=1,
+    max_epochs=5,
     plugins=DDPPlugin(find_unused_parameters=False),
   )
   return trainer
