@@ -13,7 +13,7 @@ class ErCaNet(pl.LightningModule):
 		self.my_name = my_name
 		self.cnn1 = nn.Sequential(
     	nn.Conv2d(3, 16, (3, 3), 1, 1), nn.ReLU(),
-			nn.Conv2d(16, 29, (3, 3), 1, 1), nn.ReLU()
+			nn.Conv2d(16, 32, (3, 3), 1, 1), nn.ReLU()
 		)
 		self.cnn2 = nn.Sequential(
     	nn.Conv2d(32, 32, (3, 3), 1, 1), nn.ReLU(),
