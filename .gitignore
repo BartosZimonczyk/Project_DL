@@ -163,6 +163,7 @@ venv.bak/
 # logs
 **/wandb/**/*
 wandb/*
+*.wandb
 lightning_logs/*
 
 # saved models
