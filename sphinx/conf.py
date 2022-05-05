@@ -13,7 +13,14 @@
 import os
 import sys
 sys.path.insert(0, os.path.abspath(os.path.join('..', 'src', 'Project_DL', 'DataClasses')))
+sys.path.append(os.path.abspath(os.path.join('..', 'src', 'Project_DL', 'pipelines', 'train_model_pipeline')))
+sys.path.append('../src')
+sys.path.append('../src/Project_DL')
+sys.path.append('..')
+sys.path.append('../src/Project_DL/pipelines')
 
+#sys.path.insert(0, os.path.abspath(os.path.join('..', 'src', 'Project_DL', 'pipelines', 'train_model_pipeline')))
+print(sys.path)
 
 # -- Project information -----------------------------------------------------
 
