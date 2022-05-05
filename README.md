@@ -1,10 +1,8 @@
-# ErCaNet (name in progres...)
-
-This project is under construction...
+# ErCaNet 
 
 ## What is ErCaNet about?
 
-
+The project aims to eliminate any captions on images.
 
 # How to manage with the package
 ## How to install dependencies
