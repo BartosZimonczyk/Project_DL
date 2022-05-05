@@ -1,0 +1,37 @@
+src.Project\_DL.pipelines.train\_model\_pipeline package
+========================================================
+
+Submodules
+----------
+
+src.Project\_DL.pipelines.train\_model\_pipeline.model module
+-------------------------------------------------------------
+
+.. automodule:: src.Project_DL.pipelines.train_model_pipeline.model
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+src.Project\_DL.pipelines.train\_model\_pipeline.nodes module
+-------------------------------------------------------------
+
+.. automodule:: src.Project_DL.pipelines.train_model_pipeline.nodes
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+src.Project\_DL.pipelines.train\_model\_pipeline.pipeline module
+----------------------------------------------------------------
+
+.. automodule:: src.Project_DL.pipelines.train_model_pipeline.pipeline
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: src.Project_DL.pipelines.train_model_pipeline
+   :members:
+   :undoc-members:
+   :show-inheritance:
