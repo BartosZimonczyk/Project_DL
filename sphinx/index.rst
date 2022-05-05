@@ -1,5 +1,5 @@
 .. ErCaNet documentation master file, created by
-   sphinx-quickstart on Thu May  5 01:36:24 2022.
+   sphinx-quickstart on Fri May  6 00:25:31 2022.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
