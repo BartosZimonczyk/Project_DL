@@ -8,6 +8,11 @@ from .nodes import load_dataset, get_model, get_trainer, get_logger, train, save
 
 
 def create_pipeline(**kwargs) -> Pipeline:
+    """Function that creates the model training pipeline
+
+    Returns:
+        Pipeline: Pipeline for training the model
+    """
     return pipeline([
         node(load_dataset, inputs=None, outputs=["train_loader", "test_loader", "val_loader"]),
         node(get_logger, inputs=None, outputs="wandb_logger"),
