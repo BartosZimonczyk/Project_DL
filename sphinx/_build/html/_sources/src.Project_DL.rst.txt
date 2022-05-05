@@ -1,0 +1,45 @@
+src.Project\_DL package
+=======================
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   src.Project_DL.pipelines
+
+Submodules
+----------
+
+src.Project\_DL.hooks module
+----------------------------
+
+.. automodule:: src.Project_DL.hooks
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+src.Project\_DL.pipeline\_registry module
+-----------------------------------------
+
+.. automodule:: src.Project_DL.pipeline_registry
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+src.Project\_DL.settings module
+-------------------------------
+
+.. automodule:: src.Project_DL.settings
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: src.Project_DL
+   :members:
+   :undoc-members:
+   :show-inheritance:
