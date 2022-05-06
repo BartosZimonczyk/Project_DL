@@ -9,7 +9,7 @@ import torch
 from matplotlib.pyplot import imshow, show
 from torchvision.transforms import ToTensor
 from PIL import Image
-from src.Project_DL.pipelines.train_model_pipeline.model import ErCaNet
+from Project_DL.LightningModels.model import ErCaNet
 
 
 model_2 = ErCaNet("Playground_2")
