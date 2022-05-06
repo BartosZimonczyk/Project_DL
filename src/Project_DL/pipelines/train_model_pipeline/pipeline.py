@@ -14,10 +14,10 @@ def create_pipeline(**kwargs) -> Pipeline:
         Pipeline: Pipeline for training the model
     """
     return pipeline([
-        node(load_dataset, inputs=None, outputs=["train_loader", "test_loader", "val_loader"]),
-        node(get_logger, inputs=None, outputs="wandb_logger"),
+        node(load_dataset, inputs="params:dataset_params", outputs=["train_loader", "test_loader", "val_loader"]),
+        node(get_logger, inputs="params:model_name", outputs="wandb_logger"),
         node(get_model, inputs="wandb_logger", outputs="model"),
-        node(get_trainer, inputs="wandb_logger", outputs="trainer"),
+        node(get_trainer, inputs=["wandb_logger", "params:trainer_params"], outputs="trainer"),
         node(train, inputs=["trainer", "model", "train_loader", "test_loader"], outputs=None),
-        node(save_model_to_file, inputs=["model", "wandb_logger"], outputs=None)
+        node(save_model_to_file, inputs=["model", "wandb_logger", "params:model_save_path"], outputs=None)
     ])
