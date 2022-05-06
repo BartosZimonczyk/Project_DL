@@ -8,7 +8,7 @@ import os
 
 from kedro.io import DataCatalog, MemoryDataSet
 from pytorch_lightning.loggers import WandbLogger
-from Project_DL.pipelines.train_model_pipeline.model import ErCaNet
+from Project_DL.LightningModels.model import ErCaNet
 from pytorch_lightning import Trainer
 from pytorch_lightning.plugins import DDPPlugin
 
