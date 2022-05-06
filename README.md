@@ -1,10 +1,8 @@
-# ErCaNet (name in progres...)
-
-This project is under construction...
+# ErCaNet 
 
 ## What is ErCaNet about?
 
-
+The project aims to eliminate any captions on images.
 
 # How to manage with the package
 ## How to install dependencies
@@ -82,7 +80,19 @@ We have prepared the datasets. The function that adds random Lorem Ipsum part of
 
 There is no dataset with caption for training, because it would take more than 5GB, to sum up. So it wouldn't fit on `Deep Note` drive. We have decided to calculate images with caption in training *on the fly*.
 
-## Week 4 and following
+## Week 4
 We have decided to change our approach in terms of preparing our datasets. In order to utilize power of `Pytorch Lightning`, we had to create dataloaders. We swtich to preparing captions *on the fly* for all datasets. 
 
-Currently we are working on teaching our first model.
+Currently we are working on teaching our first model. *Note from the future: it went horribly, due to hardware limits.*
+
+We have realized that learning our model on cloud could be *expensive* task. `DeepNote` wasn't good enough, google works only with notebooks in free version (I don't know how it look for premium membership), none of us have experience with Kaggle machines. I have tried to start Azure Machine with Student account (on start they give 100$ to use on whatever we want). However most of machines cost much more then 100$.
+
+Then we swtiched to offline training, on our machines. Luckily, it was working.
+
+## Week 5
+Again the biggest problem was the hardware ones. The defaoult version of torch didn't work with our GPU. However there was simple fix, download the CUDA 11.3 version of torch. After simple testing, we had finally machine to learn our model on.
+
+We trained and compared two different models. One with skip-connectors and one, simpler, without them. The results are visible in the `wandb` report.
+
+## Week 6
+We have started cleaning repo, finetuning documentation and finalizing our project.
