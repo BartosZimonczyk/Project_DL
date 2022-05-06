@@ -1,0 +1,17 @@
+model_name: 'CaptionEraseBZ-GPU-TheFourth'
+model_save_path: 'models/'
+trainer_params:
+  accelerator: 'gpu'
+  gpus: 1
+  log_every_n_steps: 10
+  val_check_interval: 0.1
+  num_processes: 1
+  max_epoch: 5
+dataset_params:
+  data_path: 'data/all_unpickle'
+  font_path: 'data/fonts'
+  max_batches: 3
+  true_randomness: False
+  resize_up_to: 256
+  batch_size: 48
+  loader_workers: 8
