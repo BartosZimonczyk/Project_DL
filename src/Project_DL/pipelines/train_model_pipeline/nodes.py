@@ -109,7 +109,7 @@ def get_trainer(wandb_logger, trainer_params, checkpoint_path):
       plugins=DDPPlugin(find_unused_parameters=False),
     )
   else:
-    trainer = Trainer(resume_from_checkpoint=checkpoint_path)
+    trainer = Trainer(resume_from_checkpoint=checkpoint_path, logger=wandb_logger)
   
   return trainer
 
