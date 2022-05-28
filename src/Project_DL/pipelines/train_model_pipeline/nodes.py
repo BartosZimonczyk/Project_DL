@@ -109,7 +109,17 @@ def get_trainer(wandb_logger, trainer_params, checkpoint_path):
       plugins=DDPPlugin(find_unused_parameters=False),
     )
   else:
-    trainer = Trainer(resume_from_checkpoint=checkpoint_path, logger=wandb_logger)
+    trainer = Trainer(
+      resume_from_checkpoint=checkpoint_path,
+      accelerator=trainer_params["accelerator"],
+      gpus=trainer_params["gpus"],
+      logger=wandb_logger,
+      log_every_n_steps=trainer_params["log_every_n_steps"],
+      val_check_interval=trainer_params["val_check_interval"],
+      num_processes=trainer_params["num_processes"],
+      max_epochs=trainer_params["max_epoch"],
+      plugins=DDPPlugin(find_unused_parameters=False),
+    )
   
   return trainer
 

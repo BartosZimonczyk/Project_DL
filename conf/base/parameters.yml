@@ -7,7 +7,7 @@ trainer_params:
   log_every_n_steps: 10
   val_check_interval: 0.1
   num_processes: 1
-  max_epoch: 5
+  max_epoch: 10
 dataset_params:
   data_path: 'data/all_unpickle'
   font_path: 'data/fonts'
