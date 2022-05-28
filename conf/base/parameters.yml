@@ -1,5 +1,6 @@
-model_name: 'CaptionEraseBZ-GPU-TheFourth'
+model_name: 'CaptionEraseBZ-GPU-TheFifth'
 model_save_path: 'models/'
+checkpoint_path: 'CaptionEraseBZ-GPU-TheThird/version_None/checkpoints/epoch=4-step=36023.ckpt'
 trainer_params:
   accelerator: 'gpu'
   gpus: 1

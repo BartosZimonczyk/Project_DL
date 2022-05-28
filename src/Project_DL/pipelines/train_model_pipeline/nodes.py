@@ -3,6 +3,7 @@ This is a boilerplate pipeline 'train_model_pipeline'
 generated using Kedro 0.17.7
 """
 
+from aifc import Error
 import torch
 import os
 
@@ -18,16 +19,8 @@ from Project_DL.DataClasses.dataloaders import DataModuleClass
 data = {}
 memory_dataset = MemoryDataSet(data)
 data_catalog = DataCatalog({"dataset": memory_dataset})
-# max_batches = 3
-# data_path = 'data/all_unpickle'
-# font_path = 'data/fonts'
-# model_save_path = 'models/'
-# true_randomness = False
-# resize_up_to = 256
-# batch_size = 48
-# loader_workers = 8
 
-# data
+
 def load_dataset(dataset_params):
   """Function that loads all datasets - training, testing and validation
 
@@ -77,6 +70,7 @@ def get_model(logger):
       ErCaNet: Model that erases captions from images
   """
   model = ErCaNet(logger.name)
+
   return model
 
 def get_logger(model_name):
@@ -92,26 +86,31 @@ def get_logger(model_name):
   return wandb_logger
 
 # trainer
-def get_trainer(wandb_logger, trainer_params):
-  """Function that creates a trainer that manages the training process of the model
+def get_trainer(wandb_logger, trainer_params, checkpoint_path):
+  """Function that creates a trainer that manages the training process of the model. If checkpoint_path is not None, then loads trainer from the checkpoint.
 
   Args:
       wandb_logger (WandbLogger): Logger that logs information about the training progress
       trainer_params (dict): A dictionary with parameters to build trainer class.
+      checkpoint_path (str): A string that points to checkpoint file saved by Trainer.
 
   Returns:
       pytorch_lightning.Trainer: Trainer that manages the training process of the model
   """
-  trainer = Trainer(
-    accelerator=trainer_params["accelerator"],
-    gpus=trainer_params["gpus"],
-    logger=wandb_logger,
-    log_every_n_steps=trainer_params["log_every_n_steps"],
-    val_check_interval=trainer_params["val_check_interval"],
-    num_processes=trainer_params["num_processes"],
-    max_epochs=trainer_params["max_epoch"],
-    plugins=DDPPlugin(find_unused_parameters=False),
-  )
+  if checkpoint_path is None:
+    trainer = Trainer(
+      accelerator=trainer_params["accelerator"],
+      gpus=trainer_params["gpus"],
+      logger=wandb_logger,
+      log_every_n_steps=trainer_params["log_every_n_steps"],
+      val_check_interval=trainer_params["val_check_interval"],
+      num_processes=trainer_params["num_processes"],
+      max_epochs=trainer_params["max_epoch"],
+      plugins=DDPPlugin(find_unused_parameters=False),
+    )
+  else:
+    trainer = Trainer(resume_from_checkpoint=checkpoint_path)
+  
   return trainer
 
 # train
@@ -138,7 +137,7 @@ def save_model_to_file(model, logger, model_save_path):
   print("##########################################")
   print(f"SAVING MODEL TO FILE: {logger.name}") 
   print("##########################################")
-  torch.save(model.state_dict(), os.path.join(model_save_path, f'{logger.name}.pt'))
+  torch.save(model, os.path.join(model_save_path, f'{logger.name}.pt'))
   print("##########################################")
   print(f"SAVED")
   print("##########################################")
